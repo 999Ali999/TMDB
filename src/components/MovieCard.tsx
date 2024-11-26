@@ -25,7 +25,7 @@ export default function MovieCard({ image, title, overview }: MovieCardProps) {
       <CardMedia
         sx={{ height: 120 }}
         image={`https://image.tmdb.org/t/p/original${image}`}
-        title={`image for ${title}`}
+        title={title}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

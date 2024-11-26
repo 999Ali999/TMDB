@@ -14,8 +14,7 @@ export const movieApi = createApi({
           page: 1,
         },
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMDIyNWEwNTY4ZGRkNzljMTE3OWY0ZTU3OGIzNGJiNiIsIm5iZiI6MTczMjU3NDMyNi43MTkzMzc1LCJzdWIiOiI2NjE2YzViNDI5YzYyNjAxNjNhMWViZDAiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.cm_Ztdk91slYQtx-TTKEbDHPLHZYKIILZ6NsW3CtaZs",
+          Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
           accept: "application/json",
         },
       }),
