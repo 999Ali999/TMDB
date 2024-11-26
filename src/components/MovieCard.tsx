@@ -1,45 +1,83 @@
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { truncateText } from "../utils/utils";
+import { Box, CardActionArea, Rating } from "@mui/material";
 
-interface MovieCardProps {
+interface MainCardProps {
   image: string;
   title: string;
-  overview: string;
 }
 
-// Utility function to truncate text
-// src/utils/truncateText.ts
-
-export default function MovieCard({ image, title, overview }: MovieCardProps) {
-  const truncatedOverview = truncateText(overview, 80); // Adjust 100 to your desired character limit
-  const truncatedTitle = truncateText(title, 18); // Adjust 18 to your desired character limit
-
+export default function MovieCard({ image, title }: MainCardProps) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        component="img"
-        sx={{ height: 120 }}
-        image={`https://image.tmdb.org/t/p/original${image}`}
-        title={title}
-        loading="lazy"
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {truncatedTitle}
-        </Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          {truncatedOverview}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
+    <Card
+      variant="outlined"
+      sx={{
+        maxWidth: 345,
+        height: "auto",
+        // padding: "5px",
+        "&:hover": {
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        },
+      }}
+    >
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          image={`https://image.tmdb.org/t/p/original${image}`}
+          loading="lazy"
+        />
+        <CardContent sx={{ paddingY: "5px" }}>
+          <Box>
+            <Typography
+              sx={{
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                "&:hover": {
+                  textDecorationLine: "underline",
+                },
+              }}
+              variant="button"
+              component="div"
+            >
+              {title}
+            </Typography>
+          </Box>
+          <Box sx={{ paddingTop: "10px" }}>
+            <Box>
+              <Rating
+                name="read-only"
+                sx={{ display: "flex", justifyContent: "center" }}
+                // value={stars}
+                readOnly
+              />
+            </Box>
+            <Box>
+              <Typography
+                sx={{ display: "flex", justifyContent: "center" }}
+                variant="caption"
+              >
+                {/* {reviews} Reviews */}
+              </Typography>
+            </Box>
+          </Box>
+          <Box>
+            <Typography
+              sx={{
+                paddingTop: "10px",
+                display: "flex",
+                justifyContent: "center",
+              }}
+              variant="body2"
+              color="text.secondary"
+            >
+              {/* ${price} */}
+            </Typography>
+          </Box>
+        </CardContent>
+      </CardActionArea>
     </Card>
   );
 }

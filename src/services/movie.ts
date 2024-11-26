@@ -9,6 +9,15 @@ export const movieApi = createApi({
   reducerPath: "movieApi",
   baseQuery: fetchBaseQuery({ baseUrl: "https://api.themoviedb.org/3/" }),
   endpoints: (builder) => ({
+    getTopRatedMovies: builder.query<{ results: Movie[] }, void>({
+      query: () => ({
+        url: "movie/top_rated",
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
+          accept: "application/json",
+        },
+      }),
+    }),
     getPopularMovies: builder.query<{ results: Movie[] }, void>({
       query: () => ({
         url: "movie/popular",
@@ -60,4 +69,5 @@ export const {
   useGetMovieDetailsByIdQuery,
   useGetMovieCreditsByIdQuery,
   useGetMovieReviewsByIdQuery,
+  useGetTopRatedMoviesQuery,
 } = movieApi;

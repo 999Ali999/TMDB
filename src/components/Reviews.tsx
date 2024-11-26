@@ -39,8 +39,11 @@ const Reviews = ({ movieId }: ReviewsProps) => {
         </Typography>
       )}
       {data?.results.map((review) => (
-        <List sx={{ width: "100%", bgcolor: "background.paper" }}>
-          <ListItem key={review.id} alignItems="flex-start">
+        <List
+          key={review.id}
+          sx={{ width: "100%", bgcolor: "background.paper" }}
+        >
+          <ListItem alignItems="flex-start">
             <ListItemAvatar>
               <Avatar
                 alt={review.author}

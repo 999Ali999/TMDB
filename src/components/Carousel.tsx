@@ -15,7 +15,8 @@ const MainCarousel = () => {
       height="390px"
       PrevIcon={<KeyboardArrowLeftIcon />}
       NextIcon={<KeyboardArrowRightIcon />}
-      indicators={false}
+      indicators={true}
+      autoPlay={true}
     >
       {data?.results.map((item, i) => (
         <Link to={`/movies/${item.id}`} key={i}>
