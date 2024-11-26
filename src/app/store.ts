@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import counterReducer from "../features/counter/counterSlice";
+import darkmodeReducer from "../features/darkmode/darkmodeSlice";
 
 // Or from '@reduxjs/toolkit/query/react'
 import { setupListeners } from "@reduxjs/toolkit/query";
@@ -10,6 +11,8 @@ import { movieApi } from "../services/movie";
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
+    darkmode: darkmodeReducer,
+
     // Add the generated reducer as a specific top-level slice
     [movieApi.reducerPath]: movieApi.reducer,
   },

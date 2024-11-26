@@ -4,6 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { truncateText } from "../utils/utils";
 
 interface MovieCardProps {
   image: string;
@@ -12,9 +13,7 @@ interface MovieCardProps {
 }
 
 // Utility function to truncate text
-const truncateText = (text: string, maxLength: number): string => {
-  return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
-};
+// src/utils/truncateText.ts
 
 export default function MovieCard({ image, title, overview }: MovieCardProps) {
   const truncatedOverview = truncateText(overview, 80); // Adjust 100 to your desired character limit
@@ -23,9 +22,11 @@ export default function MovieCard({ image, title, overview }: MovieCardProps) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
+        component="img"
         sx={{ height: 120 }}
         image={`https://image.tmdb.org/t/p/original${image}`}
         title={title}
+        loading="lazy"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

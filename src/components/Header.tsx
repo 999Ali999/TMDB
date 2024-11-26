@@ -7,6 +7,7 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { Link } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -66,9 +67,11 @@ const Header = () => {
             <Box
               sx={{ flex: 1, display: "flex", justifyContent: "flex-start" }}
             >
-              <Typography variant="h6" textTransform="none">
-                TMDB
-              </Typography>
+              <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+                <Typography variant="h6" textTransform="none">
+                  TMDB
+                </Typography>
+              </Link>
             </Box>
             <Box sx={{ flex: 1, display: "flex", justifyContent: "center" }}>
               <Search>
