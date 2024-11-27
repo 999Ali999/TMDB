@@ -15,7 +15,7 @@ const MainCarousel = () => {
       height="390px"
       PrevIcon={<KeyboardArrowLeftIcon />}
       NextIcon={<KeyboardArrowRightIcon />}
-      indicators={true}
+      indicators={false}
       autoPlay={true}
     >
       {data?.results.map((item, i) => (

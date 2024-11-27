@@ -9,15 +9,6 @@ export const movieApi = createApi({
   reducerPath: "movieApi",
   baseQuery: fetchBaseQuery({ baseUrl: "https://api.themoviedb.org/3/" }),
   endpoints: (builder) => ({
-    getTopRatedMovies: builder.query<{ results: Movie[] }, void>({
-      query: () => ({
-        url: "movie/top_rated",
-        headers: {
-          Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
-          accept: "application/json",
-        },
-      }),
-    }),
     getPopularMovies: builder.query<{ results: Movie[] }, void>({
       query: () => ({
         url: "movie/popular",
@@ -32,6 +23,20 @@ export const movieApi = createApi({
       }),
       keepUnusedDataFor: 60, // Cache the data for 60 seconds
     }),
+
+    getUpcomingMovies: builder.query<{ results: Movie[] }, number>({
+      query: (page) => ({
+        url: "movie/upcoming",
+        params: {
+          page: page,
+        },
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
+          accept: "application/json",
+        },
+      }),
+    }),
+
     getMovieDetailsById: builder.query<Movie, string>({
       query: (movieId) => ({
         url: `movie/${movieId}`,
@@ -41,6 +46,7 @@ export const movieApi = createApi({
         },
       }),
     }),
+
     getMovieCreditsById: builder.query<{ cast: Cast[] }, string>({
       query: (movieId) => ({
         url: `movie/${movieId}/credits`,
@@ -50,6 +56,7 @@ export const movieApi = createApi({
         },
       }),
     }),
+
     getMovieReviewsById: builder.query<{ results: Review[] }, string>({
       query: (movieId) => ({
         url: `movie/${movieId}/reviews`,
@@ -69,5 +76,5 @@ export const {
   useGetMovieDetailsByIdQuery,
   useGetMovieCreditsByIdQuery,
   useGetMovieReviewsByIdQuery,
-  useGetTopRatedMoviesQuery,
+  useGetUpcomingMoviesQuery,
 } = movieApi;

@@ -1,5 +1,5 @@
 // import { Counter } from "./features/counter/Counter";
-import { useGetTopRatedMoviesQuery } from "../services/movie";
+import { useGetUpcomingMoviesQuery } from "../services/movie";
 // import MovieCard from "../components/MovieCard";
 import {
   Box,
@@ -7,27 +7,38 @@ import {
   Container,
   Typography,
   Grid,
+  Pagination,
 } from "@mui/material";
 
 import { Link } from "react-router";
 import MainCarousel from "../components/Carousel";
 import MovieCard from "../components/MovieCard";
+import { useState } from "react";
 
 const HomePage = () => {
+  const [page, setPage] = useState(1);
+
   const {
     data: topRatedMovies,
     error: topRatedMoviesError,
     isLoading: topRatedMoviesIsLoading,
-  } = useGetTopRatedMoviesQuery();
+  } = useGetUpcomingMoviesQuery(page);
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setPage(value);
+  };
 
   return (
     <Container sx={{ pt: 10 }}>
       {/* <Counter /> */}
-      <Box>
+      <Box paddingTop={5}>
         <MainCarousel />
       </Box>
       <Typography variant="h4" component="h1" gutterBottom sx={{ pt: 5 }}>
-        Top Rated Movies
+        Upcoming Movies
       </Typography>
       {topRatedMoviesIsLoading ? (
         <Box
@@ -53,17 +64,23 @@ const HomePage = () => {
                 to={`/movies/${movie.id}`}
                 style={{ textDecoration: "none" }}
               >
-                {/* <MovieCard
+                <MovieCard
                   image={movie.backdrop_path}
                   title={movie.title}
-                  overview={movie.overview}
-                /> */}
-                <MovieCard image={movie.backdrop_path} title={movie.title} />
+                  vote_average={movie.vote_average}
+                />
               </Link>
             </Grid>
           ))}
         </Grid>
       )}
+
+      <Pagination
+        count={489}
+        page={page}
+        onChange={handlePageChange}
+        color="primary"
+      />
     </Container>
   );
 };

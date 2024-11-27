@@ -2,14 +2,19 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Box, CardActionArea, Rating } from "@mui/material";
+import { Box, CardActionArea, CircularProgress } from "@mui/material";
 
 interface MainCardProps {
   image: string;
   title: string;
+  vote_average: number;
 }
 
-export default function MovieCard({ image, title }: MainCardProps) {
+export default function MovieCard({
+  image,
+  title,
+  vote_average,
+}: MainCardProps) {
   return (
     <Card
       variant="outlined"
@@ -47,11 +52,16 @@ export default function MovieCard({ image, title }: MainCardProps) {
           </Box>
           <Box sx={{ paddingTop: "10px" }}>
             <Box>
-              <Rating
+              {/* <Rating
                 name="read-only"
                 sx={{ display: "flex", justifyContent: "center" }}
                 // value={stars}
                 readOnly
+              /> */}
+              <CircularProgress
+                variant="determinate"
+                value={vote_average * 10}
+                color={vote_average > 7 ? "success" : "warning"}
               />
             </Box>
             <Box>
