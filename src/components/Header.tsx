@@ -72,7 +72,7 @@ const Header = () => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <AppBar position="fixed">
+      <AppBar position="fixed" sx={{ backgroundColor: "pink" }}>
         <Toolbar>
           <Container
             maxWidth="xl"
